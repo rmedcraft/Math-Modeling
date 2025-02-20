@@ -1,0 +1,553 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     22207,        545]
+NotebookOptionsPosition[     19192,        503]
+NotebookOutlinePosition[     19613,        519]
+CellTagsIndexPosition[     19570,        516]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[TextData[{
+ "This ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " notebook exams the relationship between the populations of snowshoe hare \
+and lynx in Canada.  The snowshoe hare is a staple of the lynx diet.  The \
+data appear below.  Year zero is 1845.  General information about the \
+relationship between lynx and snowshoe hare can be found here:  ",
+ ButtonBox["https://www.enr.gov.nt.ca/en/services/lynx/lynx-snowshoe-hare-\
+cycle",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://www.enr.gov.nt.ca/en/services/lynx/lynx-snowshoe-hare-cycle"]\
+, None},
+  ButtonNote->
+   "https://www.enr.gov.nt.ca/en/services/lynx/lynx-snowshoe-hare-cycle"],
+ "\n\nEach type of data is stored as a list in ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ ". \n\nTo execute a ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " command, put your cursor anywhere in the command group and either press \
+the enter key on the number keypad or hold the shift key and press the \
+regular enter key."
+}], "Text",
+ CellChangeTimes->{{3.4735027995354*^9, 3.4735028569434*^9}, {
+  3.4735029092346*^9, 3.4735029155994*^9}, {3.4735029927192*^9, 
+  3.47350304877*^9}, {3.4735030792212*^9, 3.473503154148*^9}, {
+  3.75836342869385*^9, 3.7583634544410086`*^9}, {3.7893021337417803`*^9, 
+  3.7893021854769335`*^9}},
+ FontSize->14,ExpressionUUID->"6cc7cfa5-72a3-42bb-a443-1cdc47f0bb6f"],
+
+Cell[BoxData[{
+ RowBox[{"years", " ", "=", " ", 
+  RowBox[{"{", 
+   RowBox[{
+   "0", ",", "2", ",", "4", ",", "6", ",", "8", ",", "10", ",", "12", ",", 
+    "14", ",", "16", ",", "18", ",", "20", ",", "22", ",", "24", ",", "26", 
+    ",", "28"}], "}"}]}], "\[IndentingNewLine]", 
+ RowBox[{"thousandsofhares", " ", "=", " ", 
+  RowBox[{"{", 
+   RowBox[{
+   "20", ",", "55", ",", "65", ",", "95", ",", "55", ",", "5", ",", "15", ",",
+     "50", ",", "75", ",", "20", ",", "25", ",", "50", ",", "70", ",", "30", 
+    ",", "15"}], "}"}]}], "\[IndentingNewLine]", 
+ RowBox[{"hundredsoflynx", " ", "=", " ", 
+  RowBox[{"{", 
+   RowBox[{
+   "10", ",", "15", ",", "55", ",", "60", ",", "20", ",", "15", ",", "10", 
+    ",", "60", ",", "60", ",", "10", ",", "5", ",", "25", ",", "40", ",", 
+    "25", ",", "5"}], "}"}]}]}], "Input",
+ CellChangeTimes->{{3.473466773945994*^9, 3.4734670459875107`*^9}, {
+  3.4735027828324003`*^9, 3.4735027835968*^9}, {3.758363569662438*^9, 
+  3.7583635709792404`*^9}},
+ CellLabel->"In[17]:=",ExpressionUUID->"e8eff10c-0cd8-49c6-a276-16877279ab86"],
+
+Cell["\<\
+
+The next command generates a two - dimensional table with the year in the \
+first column and the number of hares (in thousands) in the second column.  \
+The initial output does not look like a table, but you can view the data as a \
+table by using the TableForm command.\
+\>", "Text",
+ CellChangeTimes->{{3.4735031597952003`*^9, 3.473503183242*^9}, {
+  3.4735033594440002`*^9, 3.4735034004252*^9}, {3.4735034324676*^9, 
+  3.4735034626068*^9}},
+ FontSize->14,ExpressionUUID->"49a6f915-2434-41d0-8593-f782eeb088ab"],
+
+Cell[BoxData[{
+ RowBox[{"haretable", "=", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"years", "[", 
+       RowBox[{"[", "i", "]"}], "]"}], ",", 
+      RowBox[{"thousandsofhares", "[", 
+       RowBox[{"[", "i", "]"}], "]"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "1", ",", "15"}], "}"}]}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"TableForm", "[", "haretable", "]"}]}], "Input",
+ CellChangeTimes->{{3.473467233152185*^9, 3.4734672429273863`*^9}, {
+  3.473467422514656*^9, 3.47346751915382*^9}, {3.4735034654772*^9, 
+  3.4735034717952003`*^9}},
+ CellLabel->"In[20]:=",ExpressionUUID->"1738227f-5c49-4a6c-ad2a-a56f8035a0cb"],
+
+Cell["\<\
+The next command plots the data with years on the horizontal axis and number \
+of hares (in thousands) on the y - axis.  The points are joined together; \
+leaving out the option Joined->True plots the points as dots.\
+\>", "Text",
+ CellChangeTimes->{{3.4735034985336*^9, 3.4735035823212*^9}},
+ FontSize->14,ExpressionUUID->"906a3413-4d10-4804-8fba-4666de3ab020"],
+
+Cell[BoxData[
+ RowBox[{"haredatagraph", " ", "=", " ", 
+  RowBox[{"ListPlot", "[", 
+   RowBox[{"haretable", ",", " ", 
+    RowBox[{"Joined", "\[Rule]", "True"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.4734675309392433`*^9, 3.473467549592177*^9}, {
+  3.473470491088951*^9, 3.473470496232997*^9}},
+ CellLabel->"In[22]:=",ExpressionUUID->"56ad2dd2-94ab-47ac-9f67-cd0189ec90e9"],
+
+Cell["\<\
+The next two commands collect and plot the data on the lynx population.\
+\>", "Text",
+ CellChangeTimes->{{3.4735036257516003`*^9, 3.4735036415856*^9}},
+ FontSize->14,ExpressionUUID->"ce624117-531d-4e0c-b2e7-09d28a1825dc"],
+
+Cell[BoxData[{
+ RowBox[{"lynxtable", "=", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"years", "[", 
+       RowBox[{"[", "i", "]"}], "]"}], ",", 
+      RowBox[{"hundredsoflynx", "[", 
+       RowBox[{"[", "i", "]"}], "]"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "1", ",", "15"}], "}"}]}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"TableForm", "[", "lynxtable", "]"}]}], "Input",
+ CellChangeTimes->{{3.47346756494178*^9, 3.473467603475049*^9}, {
+  3.4735035890604*^9, 3.4735036043484*^9}},
+ CellLabel->"In[23]:=",ExpressionUUID->"6b7a2fab-552d-4bea-a80b-98323320d35c"],
+
+Cell[BoxData[
+ RowBox[{"lynxdatagraph", " ", "=", " ", 
+  RowBox[{"ListPlot", "[", 
+   RowBox[{"lynxtable", ",", " ", 
+    RowBox[{"Joined", "\[Rule]", "True"}], ",", " ", 
+    RowBox[{"PlotStyle", "\[Rule]", "Red"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.473467606813299*^9, 3.4734676243086357`*^9}, {
+  3.4734705048252907`*^9, 3.473470511632522*^9}, {3.758363879151727*^9, 
+  3.7583638842130227`*^9}},
+ CellLabel->"In[25]:=",ExpressionUUID->"14fbfaa9-4c0f-4f20-9036-b57eafe149f1"],
+
+Cell["\<\
+Plot the hare and lynx data together.  Note how the populations rise and fall \
+together.  This suggests that the populations are linked.\
+\>", "Text",
+ CellChangeTimes->{{3.631528279943722*^9, 
+  3.631528340066227*^9}},ExpressionUUID->"08e1bb6b-61fe-451e-8c47-\
+32a917edbf91"],
+
+Cell[BoxData[
+ RowBox[{"Show", "[", 
+  RowBox[{"haredatagraph", ",", "lynxdatagraph"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6315281847523546`*^9, 3.631528205859192*^9}, {
+  3.758363774254681*^9, 3.758363783393105*^9}, {3.758363867263918*^9, 
+  3.7583638952413764`*^9}},
+ CellLabel->"In[26]:=",ExpressionUUID->"e41296e9-138e-4134-90f3-11efec8d2a0b"],
+
+Cell[TextData[{
+ "We will use a predator - prey model to predict the populations of lynx and \
+hare.  If Hn is the number of hare (in thousands) at year n and Ln is the \
+number of lynx (in hundreds) at year n, then the form of the model is \n ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["H", 
+    RowBox[{"n", "+", "1"}]], TraditionalForm]],ExpressionUUID->
+  "7966a547-6ab3-42ca-8ed6-fe72f4ce1eb2"],
+ StyleBox[" = (", "InlineFormula"],
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["k", "1"], TraditionalForm]],ExpressionUUID->
+  "068654a8-9626-4f39-a438-f90d6f06dccc"],
+ StyleBox[" + 1) ", "InlineFormula"],
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["H", "n"], TraditionalForm]],ExpressionUUID->
+  "b1527f57-1352-4bb3-ba98-075f16706d07"],
+ StyleBox[" ", "InlineFormula",
+  FontSize->10,
+  FontSlant->"Italic"],
+ StyleBox["- ", "InlineFormula"],
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["k", "3"], TraditionalForm]],ExpressionUUID->
+  "5b0bb2f2-e254-4bf6-9578-9f6ff15b1eed"],
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["H", "n"], TraditionalForm]],ExpressionUUID->
+  "5e55fe27-6c08-4d46-9997-10bcb590405b"],
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["L", "n"], TraditionalForm]],ExpressionUUID->
+  "ec2b101a-7c36-4af5-9fe6-71b5f832a32f"],
+ StyleBox["\n", "InlineFormula"],
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["L", 
+    RowBox[{"n", "+", "1"}]], TraditionalForm]],ExpressionUUID->
+  "b2831e34-a54c-4520-971e-9c6e5d761a07"],
+ StyleBox[" = (", "InlineFormula"],
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["k", "2"], TraditionalForm]],ExpressionUUID->
+  "fbbc7a31-8c5e-4843-a7e7-3d0e8189d997"],
+ StyleBox[" + 1) ", "InlineFormula"],
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["L", "n"], TraditionalForm]],ExpressionUUID->
+  "e68b1141-9a13-4978-a488-c06e132292c3"],
+ StyleBox[" - ", "InlineFormula"],
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["k", "4"], TraditionalForm]],ExpressionUUID->
+  "caf08e65-c769-494f-874e-0bec35dbf419"],
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["H", "n"], TraditionalForm]],ExpressionUUID->
+  "57d1c2ca-8b88-4956-abe5-a6ced6478090"],
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["L", "n"], TraditionalForm]],ExpressionUUID->
+  "1d0a3942-a3d8-4359-911a-05d5a6b21c48"],
+ "\nIn the calculations below, we use ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["k", "1"], TraditionalForm]],ExpressionUUID->
+  "a195a883-b6eb-479d-b8a6-b2e132da8aee"],
+ " = 1, ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["k", "2"], TraditionalForm]],ExpressionUUID->
+  "84e4e23e-def7-494c-9a4f-84b9d4fd3bff"],
+ " = .4, ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["k", "3"], TraditionalForm]],ExpressionUUID->
+  "a55da8fe-0b68-4ae2-a5fd-5300595159d6"],
+ " = .03, ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["k", "4"], TraditionalForm]],ExpressionUUID->
+  "6964fbff-b9e2-41f9-a0e2-9591068fb447"],
+ " = .01."
+}], "Text",
+ CellChangeTimes->{{3.4735036716468*^9, 3.4735039377672*^9}, {
+   3.4735040654844*^9, 3.4735040666544*^9}, {3.4735042186605997`*^9, 
+   3.4735043748946*^9}, 3.5690706487877436`*^9, {3.758363498930582*^9, 
+   3.7583635070823035`*^9}},
+ FontSize->14,ExpressionUUID->"c847c2be-c4ff-4d4a-8a03-762c7a4bcee2"],
+
+Cell[BoxData[
+ RowBox[{"hareprediction", " ", "=", " ", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"2", "*", 
+      RowBox[{"thousandsofhares", "[", 
+       RowBox[{"[", "i", "]"}], "]"}]}], "-", 
+     RowBox[{".03", "*", 
+      RowBox[{"thousandsofhares", "[", 
+       RowBox[{"[", "i", "]"}], "]"}], "*", 
+      RowBox[{"hundredsoflynx", "[", 
+       RowBox[{"[", "i", "]"}], "]"}]}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "1", ",", "14"}], "}"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.473468405380787*^9, 3.473468608485454*^9}, {
+  3.4734691182463207`*^9, 3.473469124581698*^9}, {3.473469160609187*^9, 
+  3.473469179290366*^9}, {3.473469393879559*^9, 3.4734694985450907`*^9}, {
+  3.473469545106367*^9, 3.473469614873982*^9}, {3.473469652086987*^9, 
+  3.473469671378807*^9}, {3.4734697064825706`*^9, 3.473469720787676*^9}},
+ CellLabel->"In[27]:=",ExpressionUUID->"9fa6c79f-572f-4e01-aa13-8089da29aee5"],
+
+Cell[BoxData[
+ RowBox[{"harepredicttable", " ", "=", " ", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"years", "[", 
+       RowBox[{"[", 
+        RowBox[{"i", "+", "1"}], "]"}], "]"}], ",", 
+      RowBox[{"hareprediction", "[", 
+       RowBox[{"[", "i", "]"}], "]"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "1", ",", "14"}], "}"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.473469201019204*^9, 3.4734692521767273`*^9}},
+ CellLabel->"In[28]:=",ExpressionUUID->"a43e71b9-8c86-407b-a6d0-6902be2b6a6a"],
+
+Cell[BoxData[
+ RowBox[{"harepredictionplot", " ", "=", " ", 
+  RowBox[{"ListPlot", "[", 
+   RowBox[{"harepredicttable", ",", 
+    RowBox[{"Joined", "\[Rule]", "True"}], ",", " ", 
+    RowBox[{"PlotStyle", "\[Rule]", "Red"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.4734692563843317`*^9, 3.4734693382717457`*^9}},
+ CellLabel->"In[29]:=",ExpressionUUID->"a5f621db-b97a-495a-b332-b4570c68c25b"],
+
+Cell[BoxData[
+ RowBox[{"Show", "[", 
+  RowBox[{"haredatagraph", ",", " ", "harepredictionplot"}], "]"}]], "Input",
+ CellChangeTimes->{{3.473469342312387*^9, 3.4734693682455683`*^9}, 
+   3.4734705507510967`*^9},
+ CellLabel->"In[30]:=",ExpressionUUID->"f7b2d5d1-79e9-4f30-9c57-81a14c61863d"],
+
+Cell[BoxData[
+ RowBox[{"lynxprediction", " ", "=", " ", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"1.4", "*", 
+      RowBox[{"hundredsoflynx", "[", 
+       RowBox[{"[", "i", "]"}], "]"}]}], "-", 
+     RowBox[{".01", "*", 
+      RowBox[{"thousandsofhares", "[", 
+       RowBox[{"[", "i", "]"}], "]"}], "*", 
+      RowBox[{"hundredsoflynx", "[", 
+       RowBox[{"[", "i", "]"}], "]"}]}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "1", ",", "14"}], "}"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.473469766487262*^9, 3.473469783512217*^9}, {
+   3.4734699375907793`*^9, 3.4734699970498133`*^9}, {3.473470027939262*^9, 
+   3.473470029089835*^9}, 3.6942668801362667`*^9},
+ CellLabel->"In[31]:=",ExpressionUUID->"9be59312-690b-46d9-9b00-11cc8afa6efd"],
+
+Cell[BoxData[
+ RowBox[{"lynxpredicttable", " ", "=", " ", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"years", "[", 
+       RowBox[{"[", 
+        RowBox[{"i", "+", "1"}], "]"}], "]"}], ",", 
+      RowBox[{"lynxprediction", "[", 
+       RowBox[{"[", "i", "]"}], "]"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "1", ",", "14"}], "}"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.473469821282351*^9, 3.47346982955801*^9}},
+ CellLabel->"In[32]:=",ExpressionUUID->"ba1100b9-b593-46b2-acac-9c5da934183c"],
+
+Cell[BoxData[
+ RowBox[{"lynxpredictionplot", " ", "=", " ", 
+  RowBox[{"ListPlot", "[", 
+   RowBox[{"lynxpredicttable", ",", 
+    RowBox[{"Joined", "\[Rule]", "True"}], ",", " ", 
+    RowBox[{"PlotStyle", "\[Rule]", "Green"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.473469851457408*^9, 3.473469862517915*^9}},
+ CellLabel->"In[33]:=",ExpressionUUID->"ff3d6f4f-fca5-4841-96fd-c2b586ab1d03"],
+
+Cell[BoxData[
+ RowBox[{"Show", "[", 
+  RowBox[{"lynxdatagraph", ",", "lynxpredictionplot"}], "]"}]], "Input",
+ CellChangeTimes->{{3.47346986797433*^9, 3.473469899199354*^9}, 
+   3.473470598989293*^9},
+ CellLabel->"In[34]:=",ExpressionUUID->"f918e676-2d48-4da7-ad79-90675ffdfd0a"],
+
+Cell["\<\
+The remaining commands generate a plot of the differences between the \
+observed population of the hares (resp. lynx) and the predicted population of \
+the hares (resp. lynx).\
+\>", "Text",
+ CellChangeTimes->{{3.4735044180442*^9, 3.4735044680889997`*^9}},
+ FontSize->14,ExpressionUUID->"45296ece-49dc-4cb2-a722-debcb1ca6651"],
+
+Cell[BoxData[
+ RowBox[{"harediff", " ", "=", " ", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"thousandsofhares", "[", 
+      RowBox[{"[", 
+       RowBox[{"i", "+", "1"}], "]"}], "]"}], "-", 
+     RowBox[{"hareprediction", "[", 
+      RowBox[{"[", "i", "]"}], "]"}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "1", ",", "14"}], "}"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.4734700513807793`*^9, 3.4734701389284983`*^9}},
+ CellLabel->"In[35]:=",ExpressionUUID->"5358eaa7-ce31-49f6-96c6-e47d6d22d734"],
+
+Cell[BoxData[
+ RowBox[{"ListPlot", "[", 
+  RowBox[{"harediff", ",", 
+   RowBox[{"PlotStyle", "\[Rule]", 
+    RowBox[{"PointSize", "[", ".025", "]"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.473470146206778*^9, 3.47347016517196*^9}, {
+  3.473470202071547*^9, 3.473470226468933*^9}, {3.47347032449419*^9, 
+  3.473470324646043*^9}},
+ CellLabel->"In[36]:=",ExpressionUUID->"e88661ad-58eb-422c-b661-716209f48692"],
+
+Cell[BoxData[
+ RowBox[{"lynzdiff", " ", "=", " ", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"hundredsoflynx", "[", 
+      RowBox[{"[", 
+       RowBox[{"i", "+", "1"}], "]"}], "]"}], "-", 
+     RowBox[{"lynxprediction", "[", 
+      RowBox[{"[", "i", "]"}], "]"}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "1", ",", "14"}], "}"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.473470243914193*^9, 3.4734702810140057`*^9}},
+ CellLabel->"In[37]:=",ExpressionUUID->"3b616976-71b2-4786-8f12-0b9e5df86847"],
+
+Cell[BoxData[
+ RowBox[{"ListPlot", "[", 
+  RowBox[{"lynzdiff", ",", " ", 
+   RowBox[{"PlotStyle", "\[Rule]", 
+    RowBox[{"PointSize", "[", ".025", "]"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.4734702851300373`*^9, 3.4734703147748938`*^9}},
+ CellLabel->"In[38]:=",ExpressionUUID->"3ed27490-48f4-4545-8bee-1913d4211edf"],
+
+Cell[BoxData[{
+ RowBox[{"hareprediction2", " ", "=", " ", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"1.9", "*", 
+      RowBox[{"thousandsofhares", "[", 
+       RowBox[{"[", "i", "]"}], "]"}]}], "-", 
+     RowBox[{".025", "*", 
+      RowBox[{"thousandsofhares", "[", 
+       RowBox[{"[", "i", "]"}], "]"}], "*", 
+      RowBox[{"hundredsoflynx", "[", 
+       RowBox[{"[", "i", "]"}], "]"}]}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "1", ",", "14"}], "}"}]}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"harepredicttable2", "=", " ", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"years", "[", 
+       RowBox[{"[", 
+        RowBox[{"i", "+", "1"}], "]"}], "]"}], ",", 
+      RowBox[{"hareprediction2", "[", 
+       RowBox[{"[", "i", "]"}], "]"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "1", ",", "14"}], "}"}]}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"harepredictionplot2", " ", "=", " ", 
+  RowBox[{"ListPlot", "[", 
+   RowBox[{"harepredicttable2", ",", 
+    RowBox[{"Joined", "\[Rule]", "True"}], ",", " ", 
+    RowBox[{"PlotStyle", "\[Rule]", "Pink"}]}], "]"}]}]}], "Input",
+ CellChangeTimes->{{3.725703693208905*^9, 3.7257037754473395`*^9}, 
+   3.725703884574027*^9, {3.7257039154057064`*^9, 3.725703918959611*^9}, {
+   3.725703952690528*^9, 3.725703966641162*^9}, {3.7257040123688555`*^9, 
+   3.725704012571597*^9}},
+ CellLabel->"In[42]:=",ExpressionUUID->"278f1b92-0c1d-4f19-91ac-02d0f0ca6ceb"],
+
+Cell[BoxData[
+ RowBox[{"Show", "[", 
+  RowBox[{"harepredictionplot", ",", " ", "harepredictionplot2"}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.725703797394258*^9, 3.7257038590264425`*^9}},
+ CellLabel->"In[45]:=",ExpressionUUID->"ce190e1d-9189-49b9-bd4c-3f9551da0b90"],
+
+Cell[BoxData[
+ RowBox[{"Show", "[", 
+  RowBox[{"haredatagraph", ",", "harepredictionplot2"}], "]"}]], "Input",
+ CellChangeTimes->{{3.7257040500163927`*^9, 3.725704081316561*^9}},
+ CellLabel->"In[46]:=",ExpressionUUID->"0adc7d81-2376-4ea7-9f35-9062fea8fb75"],
+
+Cell[BoxData[{
+ RowBox[{"harediff2", " ", "=", " ", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"thousandsofhares", "[", 
+      RowBox[{"[", 
+       RowBox[{"i", "+", "1"}], "]"}], "]"}], "-", 
+     RowBox[{"hareprediction2", "[", 
+      RowBox[{"[", "i", "]"}], "]"}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "1", ",", "14"}], "}"}]}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"ListPlot", "[", 
+  RowBox[{"harediff2", ",", 
+   RowBox[{"PlotStyle", "\[Rule]", 
+    RowBox[{"PointSize", "[", ".025", "]"}]}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.725704122940987*^9, 3.7257041441994257`*^9}},
+ CellLabel->"In[47]:=",ExpressionUUID->"575fea20-18e5-4151-a3c0-8b06f5fba074"]
+},
+WindowSize->{1264, 903},
+WindowMargins->{{78, Automatic}, {Automatic, 12}},
+PrivateNotebookOptions->{"VersionedStylesheet"->{"Default.nb"[8.] -> False}},
+FrontEndVersion->"11.3 for Microsoft Windows (64-bit) (March 6, 2018)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[545, 20, 1390, 31, 138, "Text",ExpressionUUID->"6cc7cfa5-72a3-42bb-a443-1cdc47f0bb6f"],
+Cell[1938, 53, 1070, 22, 67, "Input",ExpressionUUID->"e8eff10c-0cd8-49c6-a276-16877279ab86"],
+Cell[3011, 77, 524, 10, 75, "Text",ExpressionUUID->"49a6f915-2434-41d0-8593-f782eeb088ab"],
+Cell[3538, 89, 686, 17, 48, "Input",ExpressionUUID->"1738227f-5c49-4a6c-ad2a-a56f8035a0cb"],
+Cell[4227, 108, 372, 6, 54, "Text",ExpressionUUID->"906a3413-4d10-4804-8fba-4666de3ab020"],
+Cell[4602, 116, 378, 7, 28, "Input",ExpressionUUID->"56ad2dd2-94ab-47ac-9f67-cd0189ec90e9"],
+Cell[4983, 125, 231, 4, 33, "Text",ExpressionUUID->"ce624117-531d-4e0c-b2e7-09d28a1825dc"],
+Cell[5217, 131, 629, 16, 48, "Input",ExpressionUUID->"6b7a2fab-552d-4bea-a80b-98323320d35c"],
+Cell[5849, 149, 487, 9, 28, "Input",ExpressionUUID->"14fbfaa9-4c0f-4f20-9036-b57eafe149f1"],
+Cell[6339, 160, 287, 6, 34, "Text",ExpressionUUID->"08e1bb6b-61fe-451e-8c47-32a917edbf91"],
+Cell[6629, 168, 351, 6, 28, "Input",ExpressionUUID->"e41296e9-138e-4134-90f3-11efec8d2a0b"],
+Cell[6983, 176, 3119, 90, 119, "Text",ExpressionUUID->"c847c2be-c4ff-4d4a-8a03-762c7a4bcee2"],
+Cell[10105, 268, 941, 20, 28, "Input",ExpressionUUID->"9fa6c79f-572f-4e01-aa13-8089da29aee5"],
+Cell[11049, 290, 556, 14, 28, "Input",ExpressionUUID->"a43e71b9-8c86-407b-a6d0-6902be2b6a6a"],
+Cell[11608, 306, 394, 7, 28, "Input",ExpressionUUID->"a5f621db-b97a-495a-b332-b4570c68c25b"],
+Cell[12005, 315, 289, 5, 28, "Input",ExpressionUUID->"f7b2d5d1-79e9-4f30-9c57-81a14c61863d"],
+Cell[12297, 322, 775, 18, 28, "Input",ExpressionUUID->"9be59312-690b-46d9-9b00-11cc8afa6efd"],
+Cell[13075, 342, 553, 14, 28, "Input",ExpressionUUID->"ba1100b9-b593-46b2-acac-9c5da934183c"],
+Cell[13631, 358, 392, 7, 28, "Input",ExpressionUUID->"ff3d6f4f-fca5-4841-96fd-c2b586ab1d03"],
+Cell[14026, 367, 279, 5, 28, "Input",ExpressionUUID->"f918e676-2d48-4da7-ad79-90675ffdfd0a"],
+Cell[14308, 374, 335, 6, 33, "Text",ExpressionUUID->"45296ece-49dc-4cb2-a722-debcb1ca6651"],
+Cell[14646, 382, 530, 13, 28, "Input",ExpressionUUID->"5358eaa7-ce31-49f6-96c6-e47d6d22d734"],
+Cell[15179, 397, 411, 8, 28, "Input",ExpressionUUID->"e88661ad-58eb-422c-b661-716209f48692"],
+Cell[15593, 407, 526, 13, 28, "Input",ExpressionUUID->"3b616976-71b2-4786-8f12-0b9e5df86847"],
+Cell[16122, 422, 324, 6, 28, "Input",ExpressionUUID->"3ed27490-48f4-4545-8bee-1913d4211edf"],
+Cell[16449, 430, 1495, 38, 67, "Input",ExpressionUUID->"278f1b92-0c1d-4f19-91ac-02d0f0ca6ceb"],
+Cell[17947, 470, 270, 5, 28, "Input",ExpressionUUID->"ce190e1d-9189-49b9-bd4c-3f9551da0b90"],
+Cell[18220, 477, 257, 4, 28, "Input",ExpressionUUID->"0adc7d81-2376-4ea7-9f35-9062fea8fb75"],
+Cell[18480, 483, 708, 18, 48, "Input",ExpressionUUID->"575fea20-18e5-4151-a3c0-8b06f5fba074"]
+}
+]
+*)
+
