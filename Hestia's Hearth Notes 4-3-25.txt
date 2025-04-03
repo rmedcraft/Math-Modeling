@@ -1,0 +1,13 @@
+Seems like there should be multiple busiest months (summer & December)
+Same with lowest months, (September, January)
+
+hot and cold drinks seem to even out
+Average customers seems to even out over the week, less over the week & more over the weekend.
+
+things that are consistent from day to day or from week to week likely dont need to be modeled. They probably average out to a single number. 
+
+cant really compare Wednesday to a Saturday, but you can compare a Saturday to a Saturday. Things are consistent across weeks. 
+
+TODO OVER THE WEEKEND: 
+- DAILY PREDICTED CUSTOMERS START AT A MONTH OTHER THAN JANUARY
+- HELP KEVIN
