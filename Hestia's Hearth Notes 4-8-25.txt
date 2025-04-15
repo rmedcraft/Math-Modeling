@@ -1,0 +1,5 @@
+Todo for thursday
+- Change labels on vintage decor
+- Wrap everything in if statements
+  - 3 year projection should add vintage decor if a certain drop down is set
+  - whether inflation rate should change the costs of certain things.

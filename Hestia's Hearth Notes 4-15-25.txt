@@ -1,0 +1,5 @@
+4/15/25
+Todo: 
+- Figure out how to convert variability to the difference between the busiest & least busy month
+- Revisit monthly projected customers in general. New sheet Medcraft Projected Customers
+  - Biggest problem I see is that we aren't predicting anything. They need to know when customers will go above 150 per day so we need to predict that based on real world data
